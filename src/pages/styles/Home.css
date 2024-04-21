@@ -1,0 +1,39 @@
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    background-color: #F1F1F4;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 80%;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    transform: scale(0.20);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.harmonyHomeLogo{
+    display: flex;
+    justify-content: center;
+    height: 75px;
+}
+
+.logo{
+    height: 200px;  
+}
