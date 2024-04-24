@@ -8,7 +8,7 @@ function HomeWithMUI(){
     const navigate = useNavigate()
 
     return (
-        <Container sx={{display: "flex", flexDirection: "column", color: "primary.main", gap: 7,}}>
+        <Container sx={{display: "flex", flexDirection: "column", color: "primary.main", gap: 7, height:"75vh", alignItems: "center", justifyContent: "center"}}>
             
             <Box
             sx={{display: "flex",
@@ -20,6 +20,7 @@ function HomeWithMUI(){
             <Box
             sx={{display: "flex",
                 flexDirection: "column",
+                placeItems: "center",
                 gap: 5,}} >
 
                 <RedirectButton onClick={() => {
