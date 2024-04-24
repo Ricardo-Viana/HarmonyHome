@@ -3,7 +3,7 @@ import './App.css'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Houses from './pages/Houses'
+import Rooms from './pages/Rooms'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
-      <Route path='/houses' element={<Houses />} />
+      <Route path='/rooms' element={<Rooms />} />
     </Routes>
     </>
   )

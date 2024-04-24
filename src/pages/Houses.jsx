@@ -20,7 +20,7 @@ function Houses(){
             <NavBarBox title="TITULO AQUI"/>
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginLeft: "30px", position: "absolute", top: "150px"}}>
             {casas.map((casa, index) => (
-                <Typography variant="h5" sx={{color: "black"}}>{index + 1}: <Link style={{color: "black"}} >{casa.nome}</Link> ({casa.endereco})</Typography>
+                <Typography variant="h5" sx={{color: "primary.contrastText"}}>{index + 1}: <Link style={{color: "primary.contrastText"}} >{casa.nome}</Link> ({casa.endereco})</Typography>
             ))}
                 <IconButton aria-label="Add" sx={{color: "secondary.light"}}>
                 <AddCircleIcon /> Nova Casa
