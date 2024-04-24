@@ -1,6 +1,7 @@
 import { Box, Button, Container } from "@mui/material"
 import harmonyHomeLogo from "../assets/Harmony_Home_Logo.png"
 import { useNavigate } from "react-router-dom"
+import RedirectButton from "../components/RedirectButton"
 
 
 function HomeWithMUI(){
@@ -20,33 +21,18 @@ function HomeWithMUI(){
             sx={{display: "flex",
                 flexDirection: "column",
                 gap: 5,}} >
-                <Button sx={{color: "primary.contrastText",
-                fontFamily: "'Poppins', Arial",
-                fontSize: "20px",
-                fontWeight: 400,
-                letterSpacing: "-px",
-                lineHeight: "auto",
-                textAlign: "center",
-                backgroundColor: "primary.light",
-                borderRadius: "50px",
-                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                padding: "0px",}} onClick={() => {
-                    navigate("/register")
-                }}>Registre-se</Button>
 
-                <Button sx={{color: "primary.contrastText",
-                fontFamily: "'Poppins', Arial",
-                fontSize: "20px",
-                fontWeight: 400,
-                letterSpacing: "-px",
-                lineHeight: "auto",
-                textAlign: "center",
-                backgroundColor: "primary.light",
-                borderRadius: "50px",
-                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                padding: "0px",}} onClick={() => {
+                <RedirectButton onClick={() => {
+                    navigate("/register")
+                }}>
+                    Registre-se
+                </RedirectButton>
+                
+                <RedirectButton onClick={() => {
                     navigate("/login")
-                }}>Faça Login</Button>
+                }}>
+                    Faça Login
+                </RedirectButton>
 
             </Box>
         </Container>
