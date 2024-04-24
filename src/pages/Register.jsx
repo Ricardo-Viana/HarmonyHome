@@ -1,7 +1,6 @@
-import { Container, Box, TextField, Button } from "@mui/material"
+import { Container, Box, TextField} from "@mui/material"
 import harmonyHomeLogo from "../assets/Harmony_Home_Logo.png"
 import SubmitButton from "../components/SubmitButton"
-import { Link } from "react-router-dom"
 import RedirectLink from "../components/RedirectLink"
 
 function Register(){
