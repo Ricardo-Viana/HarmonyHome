@@ -12,6 +12,7 @@ const RedirectButton = styled(Button)(({theme}) => ({
     borderRadius: "50px",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     padding: "0px",
+    width: "350px",
     '&:hover':{
         color: theme.palette.primary.contrastText,
         backgroundColor: theme.palette.primary.main,
