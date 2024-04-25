@@ -6,16 +6,22 @@ import Login from './pages/Login'
 import { RegisteredContext } from './context/RegisteredContext'
 import { useEffect, useState } from 'react'
 import Houses from './pages/Houses'
+import { LoginContext } from './context/LoginContext'
+import {HouseContext} from './context/HouseContext'
+import AddHouse from './pages/AddHouse'
 
 function App() {
   const [registrationInfo, setRegistrationInfo] = useState([]);
 
-  const [loginInfo, setLoginInfo] = useState(null)
+  const [loginInfo, setLoginInfo] = useState(null);
+
+  const [houses, setHouses] = useState([])
 
   useEffect(() => {
-    console.log(registrationInfo)
-    console.log(loginInfo)
-  }, [registrationInfo, loginInfo])
+    console.log("registration", registrationInfo)
+    console.log("Login",loginInfo)
+    console.log("Houses",houses)
+  }, [registrationInfo, loginInfo, houses])
 
   return (
     <>
@@ -27,10 +33,14 @@ function App() {
     </Routes>
     </RegisteredContext.Provider>
 
+    <LoginContext.Provider value={loginInfo}>
+    <HouseContext.Provider value={{houses, setHouses}}>
     <Routes>
       <Route path='/houses' element={<Houses />} />
+      <Route path='/addhouse' element={<AddHouse />}></Route>
     </Routes>
-
+    </HouseContext.Provider>
+    </LoginContext.Provider>
     </>
   )
 }

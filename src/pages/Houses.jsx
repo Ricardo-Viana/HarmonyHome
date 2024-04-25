@@ -1,32 +1,52 @@
 import { Container, Box, AppBar, Typography, Toolbar, Button, IconButton, Paper  } from "@mui/material"
-import { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import NavBarBox from "../components/NavBarBox";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import BottomBarBox from "../components/BottomBarBox";
+import { LoginContext } from "../context/LoginContext";
+import { HouseContext } from "../context/HouseContext"
 
 
 function Houses(){
 
+    const loginInfo = useContext(LoginContext)
+
+    const { houses } = useContext(HouseContext)
+
+    const [userHouses, setUserHouses] = useState([])
+
+    const navigate = useNavigate()
+
     useEffect(() => {
-        document.body.style.backgroundColor = "white"
+        if(loginInfo){            
+            document.body.style.backgroundColor = "white"
+            console.log(houses)
+            setUserHouses(houses[loginInfo.id])
+            console.log(userHouses)
+        }
+        else{
+            navigate("/")
+        }
+        
     }, [])
 
-    const casas = [{nome: "Casa1", endereco: "Rua Tal" }, {nome: "Casa2", endereco: "Rua Tel" }, {nome: "Casa3", endereco: "Rua Til" },]
-
     return(
-        <>
+        <>{ loginInfo &&
         <Container sx={{display: "flex", flexDirection: "row", }}>
-            <NavBarBox title="TITULO AQUI"/>
+            <NavBarBox title={`Casas de ${loginInfo.user}`}/>
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginLeft: "30px", position: "absolute", top: "150px"}}>
-            {casas.map((casa, index) => (
-                <Typography variant="h5" sx={{color: "primary.contrastText"}}>{index + 1}: <Link style={{color: "primary.contrastText"}} >{casa.nome}</Link> ({casa.endereco})</Typography>
-            ))}
-                <IconButton aria-label="Add" sx={{color: "secondary.light"}}>
+            {userHouses &&
+                userHouses.map((casa, index) => (
+                    <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{index + 1}: <Link style={{color: "primary.contrastText"}} >{casa.name}</Link> ({casa.address})</Typography>
+                ))
+            }
+                <IconButton onClick={() => navigate("/addHouse")} aria-label="Add a house" sx={{color: "secondary.light"}}>
                 <AddCircleIcon /> Nova Casa
                 </IconButton>
             </Box>
         </Container>
+        }
             <BottomBarBox tasks="tarefasPendentes"></BottomBarBox>
         </>
     )
