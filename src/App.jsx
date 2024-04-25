@@ -3,7 +3,9 @@ import './App.css'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Tasks from './pages/Tasks'
+import AddTask from './pages/AddTask'
+import AddRoom from './pages/AddRoom'
+import AddHouse from './pages/AddHouse'
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
-      <Route path='/tasks' element={<Tasks />} />
+      <Route path='/addtask' element={<AddTask />} />
+      <Route path='/addroom' element={<AddRoom />} />
+      <Route path='/addhouse' element={<AddHouse />} />
     </Routes>
     </>
   )
