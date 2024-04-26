@@ -39,6 +39,7 @@ function AddTask(){
                 id_room: parseInt(room_id),
                 id: taskFilter.length + 1,
                 name: taskName,
+                done: false,
             }
             setTasks(prevTasks => [...prevTasks, newTask])
             navigate(`/task/${room_id}/${house_id}`)

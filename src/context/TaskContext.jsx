@@ -6,4 +6,5 @@ export const TaskContext = React.createContext({
     id_room: 0,
     id: 0,
     name: "",
+    done: false,
 })
