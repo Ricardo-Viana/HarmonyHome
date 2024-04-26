@@ -1,41 +1,64 @@
-import { useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import NavBarBox from "../components/NavBarBox"
 import { Box, IconButton, Typography, Container } from "@mui/material"
 import BottomBarBox from "../components/BottomBarBox"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { LoginContext } from "../context/LoginContext";
+import { HouseContext } from "../context/HouseContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { RoomContext } from "../context/RoomContext";
 
 
 function Rooms(){
 
-    useEffect(() => {
-        document.body.style.backgroundColor = "white"
-    }, [])
+    const loginInfo = useContext(LoginContext)
 
-    const comodos = [{nome: "Comodo"}, {nome: "Cozinha"}]
+    const { rooms } = useContext(RoomContext)
+
+    const [userHouseRooms, setUserHouseRooms] = useState([]);
+
+    const { id } = useParams()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(loginInfo){
+            document.body.style.backgroundColor = "white"
+            const roomFiltered = rooms.filter(room => room.id_user === loginInfo.id && room.id_house === parseInt(id))
+            setUserHouseRooms(roomFiltered)
+        }
+        else{
+            navigate("/")
+        }
+    }, [])
 
     return(
         <>
+        { loginInfo &&
         <Container sx={{display: "flex", flexDirection: "row"}}>
-            <NavBarBox title="TITULO AQUI" />
+            <NavBarBox title={`Cômodos de ${loginInfo.user}`} />
             <Box sx={{display: "flex", flexDirection : "column", justifyContent: "flex-start",  marginLeft: "30px", position: "absolute", top: "150px"}}>
-                {comodos.map((comodo, index) => (
+            {userHouseRooms &&
+                userHouseRooms.map((comodo, index) => (
                     <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
                     <Typography variant="h6" sx={{color: "secondary.main"}}> (N)</Typography> 
-                    <IconButton aria-label="Add" sx={{color: "primary.contrastText"}}>
+                    <IconButton aria-label="Add" sx={{color: "primary.contrastText"}} onClick={() => navigate(`/task/${comodo.id}/${id}`)}>
                         <AddCircleIcon />
                     </IconButton>
-                    <Typography variant="h6" sx={{color: "primary.contrastText"}}> {comodo.nome} </Typography>                    
+                    <Typography key={index} variant="h6" sx={{color: "primary.contrastText"}}> {comodo.name} </Typography>                    
                     </Box>
-                ))}
+                ))
+            }
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
-                    <IconButton aria-label="Add" sx={{color: "primary.contrastText"}}>
+                    <IconButton onClick={() => navigate(`/addRoom/${id}`)} aria-label="Add" sx={{color: "primary.contrastText"}}>
                         <AddCircleIcon />
                     </IconButton>
                     <Typography variant="h6" sx={{color: "secondary.light"}}> Novo Cômodo </Typography>                    
                 </Box>
             </Box>
         </Container>
-            <BottomBarBox tasks="tarefasPendentes"></BottomBarBox>
+        }
+        <BottomBarBox tasks="tarefasPendentes"></BottomBarBox>
         </>
     )
 }

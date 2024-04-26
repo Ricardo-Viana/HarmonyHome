@@ -21,9 +21,7 @@ function Houses(){
     useEffect(() => {
         if(loginInfo){            
             document.body.style.backgroundColor = "white"
-            console.log(houses)
-            setUserHouses(houses[loginInfo.id])
-            console.log(userHouses)
+            setUserHouses(houses.filter(house => house.id_user === loginInfo.id))
         }
         else{
             navigate("/")
@@ -38,7 +36,7 @@ function Houses(){
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginLeft: "30px", position: "absolute", top: "150px"}}>
             {userHouses &&
                 userHouses.map((casa, index) => (
-                    <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{index + 1}: <Link style={{color: "primary.contrastText"}} >{casa.name}</Link> ({casa.address})</Typography>
+                    <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{casa.id}: <Link style={{color: "primary.contrastText"}} to={`/rooms/${casa.id}`}>{casa.name}</Link> ({casa.address})</Typography>
                 ))
             }
                 <IconButton onClick={() => navigate("/addHouse")} aria-label="Add a house" sx={{color: "secondary.light"}}>

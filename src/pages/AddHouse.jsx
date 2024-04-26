@@ -32,10 +32,14 @@ function AddHouse(){
         event.preventDefault()
 
         if(houseName !== '' && houseAddress !== ''){
-            setHouses(prevHouses => ({
-                ...prevHouses,
-                [loginInfo.id]: [...(prevHouses[loginInfo.id] || []), { name : houseName, address : houseAddress }]
-              }));
+            const houseFilter = houses.filter(house => house.id_user === loginInfo.id)
+            const newHouse = {
+                id_user: loginInfo.id,
+                id: houseFilter.length + 1,
+                name: houseName,
+                address: houseAddress,
+            }
+            setHouses(prevHouses => [...prevHouses, newHouse])
             navigate("/houses")
         }
         else{
