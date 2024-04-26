@@ -43,9 +43,9 @@ function Tasks(){
                         inputProps={{ 'aria-label': 'controlled' }} 
                         sx={{color: "primary.contrastText", '&.Mui-checked': {
                             color: "secondary.main"
-                        }}}
+                        }}} key={index}
                         />
-                    <Typography variant="h6" sx={{color: "primary.contrastText"}}> {task.nome} </Typography>                    
+                    <Typography variant="h6" sx={{color: "primary.contrastText"}}> {task.name} </Typography>                    
                     </Box>
                 ))
             }

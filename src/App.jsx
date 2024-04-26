@@ -32,7 +32,8 @@ function App() {
     console.log("Login",loginInfo)
     console.log("Houses",houses)
     console.log("Rooms",rooms)
-  }, [registrationInfo, loginInfo, houses, rooms])
+    console.log("Tasks",tasks)
+  }, [registrationInfo, loginInfo, houses, rooms, tasks])
 
   return (
     <>
@@ -44,22 +45,31 @@ function App() {
     </Routes>
     </RegisteredContext.Provider>
 
-    <LoginContext.Provider value={loginInfo}>
-    <HouseContext.Provider value={{houses, setHouses}}>
-    <RoomContext.Provider value={{rooms, setRooms}}>
+    <LoginContext.Provider value={loginInfo}>      
     <TaskContext.Provider value={{tasks, setTasks}}>
+
+    <HouseContext.Provider value={{houses, setHouses}}>
     <Routes>
       <Route path='/houses' element={<Houses />} />
       <Route path='/addhouse' element={<AddHouse />}></Route>
+    </Routes>
+    </HouseContext.Provider>
+
+    <RoomContext.Provider value={{rooms, setRooms}}>
+    <Routes>
       <Route path='/rooms/:id' element={<Rooms />}></Route>
       <Route path='/addRoom/:id' element={<AddRoom />}></Route>
+    </Routes>
+    </RoomContext.Provider>
+
+    <Routes>
       <Route path='/task/:room_id/:house_id' element={<Tasks />}></Route>
       <Route path='/addTask/:room_id/:house_id' element={<AddTask />}></Route>
     </Routes>
+    
     </TaskContext.Provider>
-    </RoomContext.Provider>
-    </HouseContext.Provider>
     </LoginContext.Provider>
+
     </>
   )
 }

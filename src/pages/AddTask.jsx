@@ -30,6 +30,22 @@ function AddTask(){
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        if(taskName !== ''){
+            const taskFilter = tasks.filter(task => task.id_user === loginInfo.id && task.id_house === parseInt(house_id) && task.id_room === parseInt(room_id))
+            const newTask = {
+                id_user: loginInfo.id,
+                id_house: parseInt(house_id),
+                id_room: parseInt(room_id),
+                id: taskFilter.length + 1,
+                name: taskName,
+            }
+            setTasks(prevTasks => [...prevTasks, newTask])
+            navigate(`/task/${room_id}/${house_id}`)
+        }
+        else{
+            alert("Errado")
+        }
     }
 
     return(
@@ -44,7 +60,7 @@ function AddTask(){
         <form onSubmit={(e) => handleSubmit(e)} style={{ display:"flex", flexDirection:"column", gap: '2rem' }} noValidate autoComplete="off">
             <Box sx={{display: "flex", flexDirection: "column", gap: 7, alignContent: "center",}}>
                 <Typography variant="h4" sx={{color: "primary.contrastText"}}>Adicionar nova tarefa</Typography>
-                <TextField label="Adicionar nova tarefa" required/>
+                <TextField onChange={(e) => setTaskName(e.target.value)}label="Adicionar nova tarefa" required/>
                 <SubmitButton type="submit">Adicionar</SubmitButton>
             </Box>
         </form>
