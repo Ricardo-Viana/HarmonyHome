@@ -11,7 +11,7 @@ function Tasks(){
 
     const loginInfo = useContext(LoginContext)
 
-    const {tasks, setTasks} = useContext(TaskContext)
+    const {tasks, updateTasks} = useContext(TaskContext)
 
     const navigate = useNavigate()
 
@@ -40,10 +40,18 @@ function Tasks(){
     const handleCheck = (id) => {
         const updatedCheckedTasks = { ...checkedTasks, [id]: !checkedTasks[id] };
         setCheckedTasks(updatedCheckedTasks);
-        console.log(checkedTasks)
+        let taskSelect = taskList.find(task => task.id === id)
+        taskSelect = {...taskSelect, done: !checkedTasks[id]}
+        const updatedTaskList = [...taskList]
+        updatedTaskList[id - 1] = taskSelect
+        setTaskList(updatedTaskList)
+        // ATÉ AQUI TUDO CERTO, NÃO MEXER
         
-
     }
+
+    useEffect(() => {
+        console.log("Teste taskList", taskList)
+    }, [taskList])
 
     return(
         <>
