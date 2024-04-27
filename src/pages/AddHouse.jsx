@@ -8,7 +8,7 @@ import SubmitButton from "../components/SubmitButton"
 
 function AddHouse(){
 
-    const loginInfo = useContext(LoginContext)
+    const {loginInfo} = useContext(LoginContext)
     const {houses, setHouses} = useContext(HouseContext)
     const navigate = useNavigate()
 

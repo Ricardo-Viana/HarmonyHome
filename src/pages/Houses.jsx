@@ -10,7 +10,7 @@ import { HouseContext } from "../context/HouseContext"
 
 function Houses(){
 
-    const loginInfo = useContext(LoginContext)
+    const { loginInfo } = useContext(LoginContext)
 
     const { houses } = useContext(HouseContext)
 

@@ -8,7 +8,7 @@ import SubmitButton from "../components/SubmitButton"
 
 function AddRoom(){
 
-    const loginInfo = useContext(LoginContext)
+    const {loginInfo} = useContext(LoginContext)
     const [roomName, setRoomName] = useState("")
     const {rooms, setRooms} = useContext(RoomContext)
     const { id } = useParams()

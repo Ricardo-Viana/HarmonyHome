@@ -11,7 +11,7 @@ import { RoomContext } from "../context/RoomContext";
 
 function Rooms(){
 
-    const loginInfo = useContext(LoginContext)
+    const {loginInfo} = useContext(LoginContext)
 
     const { rooms } = useContext(RoomContext)
 

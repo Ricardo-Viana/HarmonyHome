@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import NavBarBox from "../components/NavBarBox"
 import { Box, Typography, Container, Checkbox, IconButton } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -9,7 +9,7 @@ import { TaskContext } from "../context/TaskContext";
 
 function Tasks(){
 
-    const loginInfo = useContext(LoginContext)
+    const {loginInfo} = useContext(LoginContext)
 
     const {tasks, setTasks} = useContext(TaskContext)
 
@@ -31,6 +31,7 @@ function Tasks(){
                 initialCheckedTasks[task.id] = false;
             });
             setCheckedTasks(initialCheckedTasks);
+            console.log("COMPONENTE MONTADO")
         }
         else{
             navigate("/")
@@ -49,12 +50,11 @@ function Tasks(){
 
     const getIncompletedTasks = (taskList) => {
         const doneTasks = taskList.filter(task => task.done)
-        console.log("TaskList", doneTasks)
+        console.log("Tarefas feitas", doneTasks)
         const incompletedTasks = tasks.filter(task => !doneTasks.some(doneTask => doneTask.id === task.id 
             && doneTask.id_user === task.id_user 
             && doneTask.id_room === task.id_room
             && doneTask.id_house === task.id_house)) 
-        console.log("Tarefas incompletas", incompletedTasks)
         return incompletedTasks;
     };
 
@@ -65,12 +65,12 @@ function Tasks(){
 
 
 
-    useEffect(() => {
+    useEffect(() => {        
         return () => {
             console.log("Dentro do unmount")
-            console.log(taskList)
-            const incompletesTasks = getIncompletedTasks(taskList)
-            setTasks(incompletesTasks)
+            const incompletedTasks = getIncompletedTasks(taskList)
+            console.log("Tarefas incompletas", incompletedTasks)
+            setTasks(incompletedTasks)
         }
     }, [taskList])
 

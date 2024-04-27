@@ -8,7 +8,7 @@ import SubmitButton from "../components/SubmitButton"
 
 function AddTask(){
 
-    const loginInfo = useContext(LoginContext)
+    const {loginInfo} = useContext(LoginContext)
     const [taskName, setTaskName] = useState("")
     const {tasks, setTasks} = useContext(TaskContext)
     const {room_id, house_id} = useParams()

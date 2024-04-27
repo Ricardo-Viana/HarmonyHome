@@ -37,7 +37,7 @@ function App() {
     </Routes>
     </RegisteredContext.Provider>
 
-    <LoginContext.Provider value={loginInfo}>      
+    <LoginContext.Provider value={{loginInfo, setLoginInfo}}>      
     <TaskContext.Provider value={{tasks, setTasks}}>
 
     <HouseContext.Provider value={{houses, setHouses}}>
