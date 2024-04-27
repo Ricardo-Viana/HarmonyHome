@@ -27,14 +27,6 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    console.log("registration", registrationInfo)
-    console.log("Login",loginInfo)
-    console.log("Houses",houses)
-    console.log("Rooms",rooms)
-    console.log("Tasks",tasks)
-  }, [registrationInfo, loginInfo, houses, rooms, tasks])
-
   return (
     <>
     <RegisteredContext.Provider value={{ registrationInfo, setRegistrationInfo, setLoginInfo }}>
