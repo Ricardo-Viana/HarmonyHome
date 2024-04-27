@@ -42,12 +42,15 @@ function Houses(){
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginLeft: "30px", position: "absolute", top: "150px"}}>
             {userHouses &&
                 userHouses.map((casa, index) => (
-                    <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{casa.id}: <Link style={{color: "primary.contrastText"}} to={`/rooms/${casa.id}`}>{casa.name}</Link> ({casa.address})</Typography>
+                    <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{casa.id}: <Link style={{color: 'black', fontWeight: 'bold'}}to={`/rooms/${casa.id}`}>{casa.name}</Link> ({casa.address})</Typography>
                 ))
             }
-                <IconButton onClick={() => navigate("/addHouse")} aria-label="Add a house" sx={{color: "secondary.light"}}>
-                <AddCircleIcon /> Nova Casa
-                </IconButton>
+                <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
+                    <IconButton onClick={() => navigate("/addHouse")} aria-label="Add a house" sx={{color: "primary.contrastText"}}>
+                        <AddCircleIcon />
+                    </IconButton>
+                    <Typography variant="h6" sx={{color: "secondary.light"}}> Nova Casa </Typography> 
+                </Box>
             </Box>
         </Container>
         }
