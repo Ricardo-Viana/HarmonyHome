@@ -27,6 +27,8 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
+  const [taskId, setTaskId] = useState(1);
+
   return (
     <>
     <RegisteredContext.Provider value={{ registrationInfo, setRegistrationInfo, setLoginInfo }}>
@@ -38,7 +40,7 @@ function App() {
     </RegisteredContext.Provider>
 
     <LoginContext.Provider value={{loginInfo, setLoginInfo}}>      
-    <TaskContext.Provider value={{tasks, setTasks}}>
+    <TaskContext.Provider value={{tasks, setTasks, taskId, setTaskId}}>
 
     <HouseContext.Provider value={{houses, setHouses}}>
     <Routes>

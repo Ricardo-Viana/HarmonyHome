@@ -27,7 +27,7 @@ function Houses(){
             document.body.style.backgroundColor = "white"
             setUserHouses(houses.filter(house => house.id_user === loginInfo.id))
             
-            setCountTasks(tasks.filter(task => task.id_user === loginInfo.id).length)
+            setCountTasks(tasks.filter(task => task.id_user === loginInfo.id && !task.done).length)
         }
         else{
             navigate("/")

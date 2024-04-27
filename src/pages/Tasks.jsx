@@ -23,7 +23,7 @@ function Tasks(){
     useEffect(() => {
         if(loginInfo){
             document.body.style.backgroundColor = "white";
-            const tasksFiltered = tasks.filter(task => task.id_user === loginInfo.id && task.id_house === parseInt(house_id) && task.id_room === parseInt(room_id));
+            const tasksFiltered = tasks.filter(task => task.id_user === loginInfo.id && task.id_house === parseInt(house_id) && task.id_room === parseInt(room_id) && task.done === false);
             setTaskList(tasksFiltered);
 
             const initialCheckedTasks = {};
@@ -31,7 +31,6 @@ function Tasks(){
                 initialCheckedTasks[task.id] = false;
             });
             setCheckedTasks(initialCheckedTasks);
-            console.log("COMPONENTE MONTADO")
         }
         else{
             navigate("/")
@@ -41,38 +40,15 @@ function Tasks(){
     const handleCheck = (id) => {
         const updatedCheckedTasks = { ...checkedTasks, [id]: !checkedTasks[id] };
         setCheckedTasks(updatedCheckedTasks);
-        let taskSelect = taskList.find(task => task.id === id)
-        taskSelect = {...taskSelect, done: !checkedTasks[id]}
-        const updatedTaskList = [...taskList]
-        updatedTaskList[id - 1] = taskSelect
-        setTaskList(updatedTaskList)
+        const updatedTasks = tasks.map(task => {
+            if (task.id === id) {
+                return {...task, done: !checkedTasks[id]};
+            } else {
+                return task;
+            }
+        });
+        setTasks(updatedTasks);
     }
-
-    const getIncompletedTasks = (taskList) => {
-        const doneTasks = taskList.filter(task => task.done)
-        console.log("Tarefas feitas", doneTasks)
-        const incompletedTasks = tasks.filter(task => !doneTasks.some(doneTask => doneTask.id === task.id 
-            && doneTask.id_user === task.id_user 
-            && doneTask.id_room === task.id_room
-            && doneTask.id_house === task.id_house)) 
-        return incompletedTasks;
-    };
-
-    useEffect(() => {
-        console.log("Teste taskList", taskList)
-    }, [taskList])
-
-
-
-
-    useEffect(() => {        
-        return () => {
-            console.log("Dentro do unmount")
-            const incompletedTasks = getIncompletedTasks(taskList)
-            console.log("Tarefas incompletas", incompletedTasks)
-            setTasks(incompletedTasks)
-        }
-    }, [taskList])
 
     return(
         <>
@@ -81,7 +57,8 @@ function Tasks(){
             <NavBarBox title={`Tarefas de ${loginInfo.user}`}/>
             <Box sx={{display: "flex", flexDirection : "column", justifyContent: "flex-start",  marginLeft: "30px", position: "absolute", top: "150px"}}>
             {taskList &&
-                taskList.map((task, index) => (
+                taskList.filter(task => !task.done)
+                .map((task, index) => (
                     <Box key={index} sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
                     <Checkbox
                         checked={checkedTasks[task.id]}

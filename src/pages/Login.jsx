@@ -20,23 +20,28 @@ function Login(){
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        const foundUser = registrationInfo.find(registration => registration.user === user && registration.password === password);
-    
         setPasswordError("");
         setUserError("");
 
-        if(foundUser){
-            setLoginInfo({id: foundUser.id, user: foundUser.user})
-            navigate("/houses")
-        }
-        else{
-            if (password === '') {
+        if (password === '' || user === '') {
+            if(password === ''){
                 setPasswordError("Senha não pode estar vazia");
             }
-            if (user === '') {
-                setUserError("Nome de usuário não pode estar vazio");
+            if(user === ''){
+                setUserError("Nome de usuário não pode estar vazio")
             }
-        }
+        }else{
+            const foundUser = registrationInfo.find(registration => registration.user === user && registration.password === password);
+            if(foundUser){
+                setLoginInfo({id: foundUser.id, user: foundUser.user})
+                navigate("/houses")
+            }
+            else{
+                setPasswordError("Usuário não encontrado")
+                setUserError("Usuário não encontrado")
+            }
+        }    
+        
     }
 
     return(

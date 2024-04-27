@@ -10,7 +10,7 @@ function AddTask(){
 
     const {loginInfo} = useContext(LoginContext)
     const [taskName, setTaskName] = useState("")
-    const {tasks, setTasks} = useContext(TaskContext)
+    const {tasks, setTasks, taskId, setTaskId} = useContext(TaskContext)
     const {room_id, house_id} = useParams()
     const navigate = useNavigate()
 
@@ -37,10 +37,11 @@ function AddTask(){
                 id_user: loginInfo.id,
                 id_house: parseInt(house_id),
                 id_room: parseInt(room_id),
-                id: taskFilter.length + 1,
+                id: taskId,
                 name: taskName.trim(),
                 done: false,
             }
+            setTaskId(prevId => prevId + 1)
             setTasks(prevTasks => [...prevTasks, newTask])
             navigate(`/task/${room_id}/${house_id}`)
         }
