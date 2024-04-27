@@ -11,7 +11,7 @@ function Tasks(){
 
     const loginInfo = useContext(LoginContext)
 
-    const {tasks, updateTasks} = useContext(TaskContext)
+    const {tasks, setTasks} = useContext(TaskContext)
 
     const navigate = useNavigate()
 
@@ -46,12 +46,34 @@ function Tasks(){
         updatedTaskList[id - 1] = taskSelect
         setTaskList(updatedTaskList)
         // ATÉ AQUI TUDO CERTO, NÃO MEXER
-        
     }
+
+    const getTasksNotInTaskList = () => {
+        // Filtrar as tarefas em 'tasks' que não estão em 'taskList' e que estão marcadas como 'done: false'
+        const tasksNotInTaskList = tasks.filter(task =>
+            !task.done && !taskList.some(taskItem => taskItem.id === task.id 
+                && taskItem.id_house === task.id_house 
+                && taskItem.id_room === task.id_room 
+                && taskItem.id_user === task.id_user)
+        );
+    
+        return tasksNotInTaskList;
+    };
 
     useEffect(() => {
         console.log("Teste taskList", taskList)
     }, [taskList])
+
+
+
+
+    useEffect(() => {
+        return () => {
+            console.log("Dentro do unmount")
+            const incompletesTasks = getTasksNotInTaskList()
+            setTasks(incompletesTasks)
+        }
+    }, [])
 
     return(
         <>
