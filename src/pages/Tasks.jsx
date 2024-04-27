@@ -104,7 +104,7 @@ function Tasks(){
             </Box>
         </Container>
         }
-            <BottomBarBox tasks="tarefasPendentes"></BottomBarBox>
+            <BottomBarBox tasks={taskList.length}></BottomBarBox>
         </>
     )
 }

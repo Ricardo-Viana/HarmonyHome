@@ -6,13 +6,17 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import BottomBarBox from "../components/BottomBarBox";
 import { LoginContext } from "../context/LoginContext";
 import { HouseContext } from "../context/HouseContext"
-
+import { TaskContext } from "../context/TaskContext"
 
 function Houses(){
 
     const { loginInfo } = useContext(LoginContext)
 
     const { houses } = useContext(HouseContext)
+
+    const { tasks } = useContext(TaskContext)
+
+    const [countTasks, setCountTasks] = useState(0)
 
     const [userHouses, setUserHouses] = useState([])
 
@@ -22,6 +26,8 @@ function Houses(){
         if(loginInfo){            
             document.body.style.backgroundColor = "white"
             setUserHouses(houses.filter(house => house.id_user === loginInfo.id))
+            
+            setCountTasks(tasks.filter(task => task.id_user === loginInfo.id).length)
         }
         else{
             navigate("/")
@@ -45,7 +51,7 @@ function Houses(){
             </Box>
         </Container>
         }
-            <BottomBarBox tasks="tarefasPendentes"></BottomBarBox>
+            <BottomBarBox tasks={countTasks}></BottomBarBox>
         </>
     )
 }
