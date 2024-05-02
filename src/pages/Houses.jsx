@@ -39,10 +39,12 @@ function Houses(){
         <>{ loginInfo &&
         <Container sx={{display: "flex", flexDirection: "row", }}>
             <NavBarBox title={`Casas de ${loginInfo.user}`}/>
-            <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginLeft: "30px", position: "absolute", top: "150px"}}>
+            <Box sx={{display: "flex", flexDirection : "column", justifyContent: "flex-start",  marginLeft: "30px", position: "absolute", top: "150px"}}>
             {userHouses &&
                 userHouses.map((casa, index) => (
+                    <Box key={index} sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
                     <Typography key={index} variant="h5" sx={{color: "primary.contrastText"}}>{casa.id}: <Link style={{color: 'black', fontWeight: 'bold'}}to={`/rooms/${casa.id}`}>{casa.name}</Link> ({casa.address})</Typography>
+                    </Box>
                 ))
             }
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center",  gap: 0.5}}>
